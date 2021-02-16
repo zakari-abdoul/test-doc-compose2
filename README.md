@@ -1,7 +1,7 @@
 # kpi_dyn
 kpi backend DigiDEX project
 
-# this are all dependaces
+# this are all dependaces in package.txt
 asgiref==3.3.1
 certifi==2020.12.5
 chardet==4.0.0
