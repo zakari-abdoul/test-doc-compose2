@@ -21,8 +21,7 @@ def import_Bearer(request):
         file_format = request.POST['file-format']
         employee_resource = BearerResource()
         dataset = Dataset()
-        new_employees = request.FILES['importData']
-
+        new_employees = request.FILES['importData']  
     return render(request, 'import.html')
 
 
