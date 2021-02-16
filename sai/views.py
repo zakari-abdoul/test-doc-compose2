@@ -39,7 +39,6 @@ def import_data(request):
             # Import now
             employee_resource.import_data(dataset, dry_run=False)
 
-    # return render(request, 'import.html') 
     return Response(serializer.data)
 
 
@@ -120,7 +119,6 @@ def import_data_SAI_OUT(request):
             # Import now
             employee_resource.import_data(dataset, dry_run=False)
 
-    # return render(request, 'import.html') 
     return Response(serializer.data)
 
 # class Sai_OUT_list(generics.ListCreateAPIView):

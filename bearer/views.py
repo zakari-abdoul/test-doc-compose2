@@ -23,19 +23,6 @@ def import_Bearer(request):
         dataset = Dataset()
         new_employees = request.FILES['importData']
 
-        # if file_format == 'CSV':
-        #     imported_data = dataset.load(new_employees.read().decode('utf-8'),format='csv')
-        #     result = employee_resource.import_data(dataset, dry_run=True)                                                                 
-        # elif file_format == 'JSON':
-        #     imported_data = dataset.load(new_employees.read().decode('utf-8'),format='json')
-        #     # Testing data import
-        #     result = employee_resource.import_data(dataset, dry_run=True) 
-            
-        # if not result.has_errors():
-        #     # Import now
-        #     #
-        #     employee_resource.import_data(dataset, dry_run=False)
-
     return render(request, 'import.html')
 
 
