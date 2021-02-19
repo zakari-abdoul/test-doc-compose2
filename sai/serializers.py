@@ -18,3 +18,8 @@ class Sai_OUT_Post_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Sai_OUT
         fields = ['Interval_Time','Opcode',]
+
+
+class FileSaiSerializer(serializers.Serializer):
+    type = serializers.CharField(required=True)
+    inputFile = serializers.FileField(max_length=None, required=True)

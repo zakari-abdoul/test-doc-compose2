@@ -25,9 +25,9 @@ class Sai_OUT(models.Model):
     Service = models.CharField(max_length=20)
     Opcode = models.CharField(max_length=100)
     HVA = models.CharField(max_length=40)
-    Total_Transactions = models.PositiveIntegerField()
-    Failed_Transactions =models.PositiveIntegerField()
-    EFF =  models.PositiveIntegerField()
+    Total_Transactions = models.IntegerField()
+    Failed_Transactions =models.IntegerField()
+    EFF =models.IntegerField()
     
     def __str__(self):
         return "Sai_OUT"
