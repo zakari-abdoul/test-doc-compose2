@@ -274,15 +274,15 @@ def insertData(df, object, roam):
             sai: object = object(
                 Interval_Time=df["Interval Time"][i], PLMN_Carrier=df["PLMN Carrier"][i],
                 Direction=df["Direction"][i], Service=df["Service"][i],
-                Opcode=df["Opcode"][i], HVA=df["HVA"][i], EFF=df["Eff "][i],
-                Total_Transactions=df["Total Transactions"][i], Failed_Transactions=df["Failed Transactions"][i],
+                Opcode=df["Opcode"][i], HVA=df["HVA"][i], Total_Transactions=df["Total Transactions"][i],
+                Failed_Transactions=df["Failed Transactions"][i], EFF=df["Eff"][i],
             )
         else:
             sai: object = object(
                 Interval_Time=df["Unnamed: 0"][i], PLMN_Carrier=df["Unnamed: 1"][i],
                 Direction=df["Unnamed: 2"][i], Service=df["Unnamed: 3"][i],
-                Opcode=df["Unnamed: 4"][i], HVA=df["Unnamed: 5"][i], EFF=df["Unnamed: 6"][i],
-                Total_Transactions=df["Unnamed: 7"][i], Failed_Transactions=df["Unnamed: 8"][i],
+                Opcode=df["Unnamed: 4"][i], HVA=df["Unnamed: 5"][i], Total_Transactions=df["Unnamed: 6"][i],
+                Failed_Transactions=df["Unnamed: 7"][i], EFF=df["Unnamed: 8"][i],
             )
         i = i + 1
         liste.append(sai)
