@@ -5,7 +5,8 @@ import pandas as pd
 from tablib import Dataset
 import xlrd
 from .models import Sai_IN, Sai_OUT
-from sai.serializers import Sai_IN_Serializer, Sai_OUT_Serializer, Sai_OUT_Post_Serializer, FileSaiSerializer
+from sai.serializers import Sai_IN_Serializer, Sai_OUT_Serializer, Sai_OUT_Post_Serializer, FileSaiSerializer, \
+    ParameterwSaiSerializer
 from rest_framework.decorators import api_view, action
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
@@ -130,8 +131,8 @@ def Sai_OUT_list(request):
     List of all code snippets, or create a new SAI OUT List.
     """
     if request.method == 'GET':
-        snippets = Sai_OUT.objects.all()[:20]
-        serializer = Sai_OUT_Serializer(snippets, many=True)
+        sai_out = Sai_IN.objects.all()[:20]
+        serializer = Sai_IN_Serializer(sai_out, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':        
@@ -213,10 +214,10 @@ class SaiViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
     """
-    queryset = Sai_OUT.objects.all()
-    serializer_class = Sai_OUT_Serializer
-    # filterset_fields = ['userCode', 'originalName']
-    # search_fields = ['userCode', 'originalName']
+    queryset = Sai_IN.objects.all()
+    serializer_class = Sai_IN_Serializer
+    # filterset_fields = ['PLMN_Carrier']
+    search_fields = ['^PLMN_Carrier']
     # ordering_fields = ['create_at']
     # filter_backends = [filters.SearchFilter,DjangoFilterBackend, filters.OrderingFilter]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -224,8 +225,15 @@ class SaiViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
 
+    @action(detail=False, methods=['post'], serializer_class=ParameterwSaiSerializer)
+    def parametresai(self, request, *args, **kwargs):
+
+        serializer = FileSaiSerializer(data=request.data)
+        if serializer.is_valid():
+            queryset = Sai_IN.objects.filter(Hva="")
+        serializer_class = Sai_IN_Serializer
     @action(detail=False, methods=['post'], serializer_class=FileSaiSerializer)
-    def createtransfert(self, request, *args, **kwargs):
+    def uploadsai(self, request, *args, **kwargs):
         """
          Telecharger le fichier txt envoyer par la dgid pour effectuer une transaction
         """
@@ -234,27 +242,51 @@ class SaiViewSet(viewsets.ModelViewSet):
 
             uploaded_file = serializer.validated_data['inputFile']
             df = pd.read_excel(uploaded_file.read(), engine="openpyxl")
+            # df_new = df.rename(columns={'Interval Time': 'Interval_Time', 'Service': 'Service',
+            #                             'PLMN Carrier': 'PLMN_Carrier', 'Direction': 'Direction',
+            #                             'Opcode': 'Opcode', 'HVA': 'HVA', 'EFF': 'EFF',
+            #                             'Total Transactions': 'Total_Transactions',
+            #                             'Failed Transactions': 'Failed_Transactions'})
+
             print(df)
-            #workbook = xlrd.open_workbook(uploaded_file)
-            #print(str(uploaded_file)) encoding =
+            #print(df_new)
 
-            #     str_text = str(x.decode("utf-8").replace("\n", ""))
-            #     montant = montant + int(str_text.split(';')[2])
-            #     # datetime_str = '09/19/18 13:55:26'
-            #     # datetime_object = datetime.strptime(datetime_str, '%m/%d/%y %H:%M:%S')
-            #     transfert: Transfert = Transfert(
-            #         originalName=str_text.split(';')[0], originalId=str_text.split(';')[5], numcarte=str_text.split(';')[1],
-            #         montant=str_text.split(';')[2], languageCode="FR", userCode="gabi",
-            #         channelCode=str_text.split(';')[3], canal="1", pain001=str_text.split(';')[1]
-            #     )
-            #     transfert.save()
-            #     liste.append(transfert)
-            # serializer_c = CompteSerializer(compte, data={'montant': compte['montant']+montant}, partial=True)
-            # # if serializer_c.is_valid():
-            # #     serializer_c.save()
-            # transfert_serialized = TransfertSerializer(liste, many=True).data
+            liste = []
+            if serializer.validated_data['type'] =="OUT":
+                liste = insertData(df, Sai_OUT, "out")
+            else:
+                liste = insertData(df, Sai_IN, "in")
 
-            return Response({"data": serializer.validated_data['type']}, status=status.HTTP_201_CREATED)
+
+            return Response({"numberofligne": len(liste), "type": df.columns}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+def insertData(df, object, roam):
+    liste = []
+    i = 1
+    if roam == "in":
+        i = 4
+    while i < len(df):
+        if roam == "out":
+            sai: object = object(
+                Interval_Time=df["Interval Time"][i], PLMN_Carrier=df["PLMN Carrier"][i],
+                Direction=df["Direction"][i], Service=df["Service"][i],
+                Opcode=df["Opcode"][i], HVA=df["HVA"][i], EFF=df["Eff "][i],
+                Total_Transactions=df["Total Transactions"][i], Failed_Transactions=df["Failed Transactions"][i],
+            )
+        else:
+            sai: object = object(
+                Interval_Time=df["Unnamed: 0"][i], PLMN_Carrier=df["Unnamed: 1"][i],
+                Direction=df["Unnamed: 2"][i], Service=df["Unnamed: 3"][i],
+                Opcode=df["Unnamed: 4"][i], HVA=df["Unnamed: 5"][i], EFF=df["Unnamed: 6"][i],
+                Total_Transactions=df["Unnamed: 7"][i], Failed_Transactions=df["Unnamed: 8"][i],
+            )
+        i = i + 1
+        liste.append(sai)
+
+    data = object.objects.bulk_create(liste)
+
+    return data

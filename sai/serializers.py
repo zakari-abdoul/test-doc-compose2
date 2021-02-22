@@ -20,6 +20,13 @@ class Sai_OUT_Post_Serializer(serializers.ModelSerializer):
         fields = ['Interval_Time','Opcode',]
 
 
+class ParameterwSaiSerializer(serializers.Serializer):
+    roaming = serializers.CharField(required=True)
+    country = serializers.CharField(required=True)
+    operator = serializers.CharField(required=True)
+    dateDebut = serializers.CharField(required=True)
+    dateFin = serializers.CharField(required=True)
+
 class FileSaiSerializer(serializers.Serializer):
     type = serializers.CharField(required=True)
     inputFile = serializers.FileField(max_length=None, required=True)

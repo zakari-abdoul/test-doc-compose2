@@ -19,12 +19,12 @@ class Sai_IN(models.Model):
 
 
 class Sai_OUT(models.Model):
-    Interval_Time = models.CharField(max_length=25)
-    PLMN_Carrier = models.CharField(max_length=100)
-    Direction = models.CharField(max_length=40)
-    Service = models.CharField(max_length=20)
-    Opcode = models.CharField(max_length=100)
-    HVA = models.CharField(max_length=40)
+    Interval_Time = models.CharField(max_length=255)
+    PLMN_Carrier = models.CharField(max_length=255)
+    Direction = models.CharField(max_length=255)
+    Service = models.CharField(max_length=255)
+    Opcode = models.CharField(max_length=255)
+    HVA = models.CharField(max_length=255)
     Total_Transactions = models.IntegerField()
     Failed_Transactions =models.IntegerField()
     EFF =models.IntegerField()
