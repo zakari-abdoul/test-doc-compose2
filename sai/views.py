@@ -5,11 +5,11 @@ import pandas as pd
 from tablib import Dataset
 import xlrd
 from .models import Sai_IN, Sai_OUT
-from sai.serializers import Sai_IN_Serializer, Sai_OUT_Serializer, Sai_OUT_Post_Serializer, FileSaiSerializer, \
-    ParameterwSaiSerializer
+from sai.serializers import Sai_IN_Serializer, Sai_OUT_Serializer, FileSaiSerializer,ParameterwSaiSerializer
 from rest_framework.decorators import api_view, action
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
+
 
 
 
@@ -214,8 +214,8 @@ class SaiViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
     """
-    queryset = Sai_IN.objects.all()
-    serializer_class = Sai_IN_Serializer
+    queryset = Sai_OUT.objects.all()
+    serializer_class = Sai_OUT_Serializer
     # filterset_fields = ['PLMN_Carrier']
     search_fields = ['^PLMN_Carrier']
     # ordering_fields = ['create_at']
@@ -227,11 +227,23 @@ class SaiViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'], serializer_class=ParameterwSaiSerializer)
     def parametresai(self, request, *args, **kwargs):
-
-        serializer = FileSaiSerializer(data=request.data)
+        serializer = ParameterwSaiSerializer(data=request.data)
         if serializer.is_valid():
-            queryset = Sai_IN.objects.filter(Hva="")
-        serializer_class = Sai_IN_Serializer
+            dateDebut = serializer.validated_data['dateDebut']
+            dateFin = serializer.validated_data['dateFin']
+            country_operator = serializer.validated_data['country_operator']
+            roaming = serializer.validated_data['roaming']
+
+            if roaming == "OUT":
+                queryset = Sai_OUT.objects.filter(PLMN_Carrier=country_operator)
+                razbi = Sai_OUT_Serializer(queryset, many=True)
+            else:
+                queryset = Sai_IN.objects.filter(PLMN_Carrier=country_operator)
+                razbi = Sai_IN_Serializer(queryset, many=True)
+
+            return Response(razbi.data, status=status.HTTP_201_CREATED)
+        return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
+
     @action(detail=False, methods=['post'], serializer_class=FileSaiSerializer)
     def uploadsai(self, request, *args, **kwargs):
         """
@@ -260,8 +272,7 @@ class SaiViewSet(viewsets.ModelViewSet):
 
             return Response({"numberofligne": len(liste), "type": df.columns}, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors,
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 def insertData(df, object, roam):
@@ -275,7 +286,7 @@ def insertData(df, object, roam):
                 Interval_Time=df["Interval Time"][i], PLMN_Carrier=df["PLMN Carrier"][i],
                 Direction=df["Direction"][i], Service=df["Service"][i],
                 Opcode=df["Opcode"][i], HVA=df["HVA"][i], Total_Transactions=df["Total Transactions"][i],
-                Failed_Transactions=df["Failed Transactions"][i], EFF=df["Eff"][i],
+                Failed_Transactions=df["Failed Transactions"][i], EFF=df["EFF"][i],
             )
         else:
             sai: object = object(
@@ -285,8 +296,13 @@ def insertData(df, object, roam):
                 Failed_Transactions=df["Unnamed: 7"][i], EFF=df["Unnamed: 8"][i],
             )
         i = i + 1
-        liste.append(sai)
+        # insert this part if we just need to verify the true values
+        
+        if(sai.PLMN_Carrier == sai.HVA):
+            liste.append(sai)
+        else:
+            return ("On prends pas en compte les données si Les PLMN_Carrier sont different des HVA")
+            
 
     data = object.objects.bulk_create(liste)
-
     return data

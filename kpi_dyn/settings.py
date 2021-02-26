@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'kpi_dyn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kpi_dyn',
+        'NAME': 'kpi_dyn_sane',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
