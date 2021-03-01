@@ -19,11 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from sai.views import SaiViewSet
+from bearer.views import BearerViewSet
+from pdp.views import PdpViewSet
 
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'sai', SaiViewSet)
+router.register(r'bearer', BearerViewSet)
+router.register(r'pdp', PdpViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),

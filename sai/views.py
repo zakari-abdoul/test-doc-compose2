@@ -298,10 +298,10 @@ def insertData(df, object, roam):
         i = i + 1
         # insert this part if we just need to verify the true values
         
-        if(sai.PLMN_Carrier == sai.HVA):
-            liste.append(sai)
-        else:
-            return ("On prends pas en compte les données si Les PLMN_Carrier sont different des HVA")
+        # if(sai.PLMN_Carrier == sai.HVA):
+        liste.append(sai)
+        # elif (sai.HVA == 221_Senegal Orange)
+            # return ("On prends pas en compte les données si Les PLMN_Carrier sont different des HVA")
             
 
     data = object.objects.bulk_create(liste)

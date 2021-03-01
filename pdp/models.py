@@ -1,30 +1,29 @@
-# from django.db import models
+from django.db import models
 
-# # '%b %d, %Y',      # 'Oct 25, 2006'
+# '%b %d, %Y',      # 'Oct 25, 2006'
 
-
-# class Pdp_IN(models.Model):
-#     Inbound = models.CharField(max_length=25)
-#     GTP-C Procedure Attempts = models.PositiveIntegerField()
-#     GTP-C Procedure Failures = models.PositiveIntegerField()
-#     GTP-C Procedure Failure % = models.FloatField()
-#     GTP-C Procedure Average Latency (msec) = models.PositiveIntegerField()
-#     Eff PDP Act = models.FloatField()
+class Pdp_OUT(models.Model):
+    Date = models.CharField(max_length=25)
+    Operator = models.CharField(max_length=255)
+    GTP_C_Procedure_Attempts = models.IntegerField()
+    GTP_C_Procedure_Failures = models.IntegerField()
+    GTP_C_Procedure_Failure = models.FloatField()
+    GTP_C_Procedure_Average_Latency_msec = models.FloatField(null=True)
+    Eff_PDP_Act = models.FloatField()
     
-#     def __str__(self):
-#         return "Pdp_IN"
+    def __str__(self):
+        return "Pdp_OUT"
 
-
-# class Pdp_OUT(models.Model):
-#     Interval_Time = models.CharField(max_length=25)
-#     PLMN_Carrier = models.CharField(max_length=100)
-#     Direction = models.CharField(max_length=40)
-#     Service = models.CharField(max_length=20)
-#     Opcode = models.CharField(max_length=100)
-#     HVA = models.CharField(max_length=40)
-#     Total_Transactions = models.PositiveIntegerField()
-#     Failed_Transactions =models.PositiveIntegerField()
-#     EFF =  models.PositiveIntegerField()
+class Pdp_IN(models.Model):
+    Date = models.CharField(max_length=25)
+    Operator = models.CharField(max_length=255)
+    GTP_C_Procedure_Attempts_IN = models.IntegerField()
+    GTP_C_Procedure_Failures_IN = models.IntegerField()
+    GTP_C_Procedure_Failure_IN = models.FloatField()
+    GTP_C_Procedure_Average_Latency_msec_IN = models.FloatField(null=True)
+    Eff_PDP_Act_IN = models.FloatField()
     
-#     def __str__(self):
-#         return "Pdp_OUT"
+    def __str__(self):
+        return "Pdp_IN"
+
+

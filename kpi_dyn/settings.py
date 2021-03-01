@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'sai',
     'bearer',
     'uploadFile',
-    # 'pdp',
+    'pdp',
+    # 'lte',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ WSGI_APPLICATION = 'kpi_dyn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kpi_dyn_sane',
+        'NAME': 'kpi_dyn',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

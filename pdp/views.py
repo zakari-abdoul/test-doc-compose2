@@ -1,56 +1,93 @@
-# from django.shortcuts import render
-# from django.http import HttpResponse
-# from tablib import Dataset
-# from .resources import Pdp_IN_Resource
-# from .models import Pdp_IN
-# from .serializers import Pdp_IN_Serializer
-# from rest_framework.decorators import api_view
-# from rest_framework import status
-# from rest_framework.response import Response
+import os
+from io import StringIO
+
+import pandas as pd
+from tablib import Dataset
+import xlrd
+from .models import Pdp_IN, Pdp_OUT
+from pdp.serializers import FilePdpSerializer, ParameterwPdpSerializer, Pdp_IN_Serializer, Pdp_OUT_Serializer  
+from rest_framework.decorators import api_view, action
+from rest_framework import status, viewsets, permissions
+from rest_framework.response import Response
 
 
 
-# """
-# This part is for the SAI In
-# """
-# @api_view(['POST'])
-# def import_data(request):
-#     if request.method == 'POST':
-#         file_format = request.POST['file-format']
-#         employee_resource = Pdp_IN_Serializer()
-#         dataset = Dataset()
-#         new_employees = request.FILES['importData']
+#####################################################################
+#####################################################################
+class PdpViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
+    """
+    queryset = Pdp_IN.objects.all()
+    serializer_class = Pdp_IN_Serializer
+    # filterset_fields = ['PLMN_Carrier']
+    search_fields = ['^Date']
+    # ordering_fields = ['create_at']
+    # filter_backends = [filters.SearchFilter,DjangoFilterBackend, filters.OrderingFilter]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-#         if file_format == 'CSV':
-#             imported_data = dataset.load(new_employees.read().decode('utf-8'),format='csv')
-#             result = employee_resource.import_data(dataset, dry_run=True)                                                                 
-#         elif file_format == 'JSON':
-#             imported_data = dataset.load(new_employees.read().decode('utf-8'),format='json')
-#             # Testing data import
-#             result = employee_resource.import_data(dataset, dry_run=True) 
+    def perform_create(self, serializer):
+        serializer.save()
 
-#         if not result.has_errors():
-#             # Import now
-#             employee_resource.import_data(dataset, dry_run=False)
+    @action(detail=False, methods=['post'], serializer_class=ParameterwPdpSerializer)
+    def parametrePdp(self, request, *args, **kwargs):
+        serializer = ParameterwPdpSerializer(data=request.data)
+        if serializer.is_valid():
+            dateDebut = serializer.validated_data['dateDebut']
+            dateFin = serializer.validated_data['dateFin']
+            country_operator = serializer.validated_data['country_operator']
+            roaming = serializer.validated_data['roaming']
 
-#     # return render(request, 'import.html') 
-#     return Response(serializer.data)
+            if roaming == "OUT":
+                queryset = Pdp_OUT.objects.filter(Operator=country_operator)
+                razbi = Pdp_OUT_Serializer(queryset, many=True)
+            else:
+                queryset = Pdp_IN.objects.filter(Operator=country_operator)
+                razbi = Pdp_In_Serializer(queryset, many=True)
+
+            return Response(razbi.data, status=status.HTTP_201_CREATED)
+        return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'], serializer_class=FilePdpSerializer)
+    def uploadPdp(self, request, *args, **kwargs):
+        """
+         Telecharger le fichier txt envoyer par la dgid pour effectuer une transaction
+        """
+        serializer = FilePdpSerializer(data=request.data)
+        if serializer.is_valid():
+            uploaded_file = serializer.validated_data['inputFile']
+            df = pd.read_excel(uploaded_file.read(), engine="openpyxl")
+            print(df)
+            liste = []
+            if serializer.validated_data['type'] =="OUT":
+                liste = insertData(df, Pdp_OUT, "out")
+            else:
+                liste = insertData(df, Pdp_IN, "in")
 
 
+            return Response({"numberofligne": len(liste), "type": df.columns}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['GET', 'POST'])
-# def Pdp_IN_view(request):
-#     """
-#     List all code snippets, or create a new snippet.
-#     """
-#     if request.method == 'GET':
-#         snippets = Pdp_IN.objects.all()
-#         serializer = Pdp_IN_Serializer(snippets, many=True)
-#         return Response(serializer.data)
 
-#     elif request.method == 'POST':
-#         serializer = Pdp_IN_Serializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+def insertData(df, object, roam):
+    liste = []
+    i = 1
+    while i < len(df): 
+        if roam == "out":
+            pdp: object = object(
+                Date=df["Date"][i], Operator=df["Operator"][i],
+                GTP_C_Procedure_Attempts=df["GTP-C Procedure Attempts"][i], GTP_C_Procedure_Failures=df["GTP-C Procedure Failures"][i],
+                GTP_C_Procedure_Failure=df["GTP-C Procedure Failure %"][i], GTP_C_Procedure_Average_Latency_msec=df["GTP-C Procedure Average Latency (msec)"], Eff_PDP_Act=df["Eff PDP Act"][i],
+            )
+        else:
+            pdp: object = object(
+                Date=df["Date"][i], Operator=df["Operator"][i],
+                GTP_C_Procedure_Attempts_IN=df["GTP-C Procedure Attempts IN"][i], GTP_C_Procedure_Failures_IN=df["GTP-C Procedure Failures IN"][i],
+                GTP_C_Procedure_Failure_IN =df["GTP-C Procedure Failure % IN"][i], GTP_C_Procedure_Average_Latency_msec__IN=df["GTP-C Procedure Average Latency (msec) IN"][i], Eff_PDP_Act_IN=df["Eff PDP Act IN"][i],
+        )
+        i = i + 1
+        liste.append(pdp)           
+
+    data = object.objects.bulk_create(liste)
+    return data
