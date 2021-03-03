@@ -165,7 +165,7 @@ EMAIL_USE_TLS = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'webmail.orange-sonatel.com'
 EMAIL_HOST_PASSWORD = ''
-EMAIL_HOST_USER = 'abdoulkarimzakari.hamidou@orange-sonatel.com'
+EMAIL_HOST_USER = 'tapha.@orange-sonatel.com'
 EMAIL_PORT = 25
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
