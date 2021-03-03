@@ -52,7 +52,7 @@ numpy
 odfpy==1.4.1
 openpyxl==3.0.6
 packaging==20.4
-pandas==1.2.2
+pandas
 Pillow==8.0.1
 psycopg2==2.8.6
 psycopg2-binary==2.8.6
