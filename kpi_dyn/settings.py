@@ -159,3 +159,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 IMPORT_EXPORT_USE_TRANSACTIONS = False
+
+# e-mail configurations
+EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'webmail.orange-sonatel.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'abdoulkarimzakari.hamidou@orange-sonatel.com'
+EMAIL_PORT = 25
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# sending test
+# from django.core.mail import EmailMessage
+# email = EmailMessage('Test', 'Test, repondez si reçu !', to=['abdoulkarimzakari.hamidou@orange-sonatel.com'])
+# email.send()
