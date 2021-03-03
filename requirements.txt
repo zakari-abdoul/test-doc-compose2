@@ -19,7 +19,7 @@ mysqlclient==2.0.3
 numpy
 odfpy==1.4.1
 openpyxl==3.0.6
-pandas==1.2.2
+pandas
 psycopg2==2.8.6
 pyexcel==0.6.6
 pyexcel-io==0.6.4
