@@ -48,7 +48,7 @@ MarkupPy==1.14
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mysqlclient==2.0.3
-numpy==1.20.1
+numpy
 odfpy==1.4.1
 openpyxl==3.0.6
 packaging==20.4
