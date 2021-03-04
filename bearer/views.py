@@ -66,8 +66,8 @@ class BearerViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
     """
-    queryset = Bearer_In.objects.all()
-    serializer_class = Bearer_In_Serializer
+    queryset = Bearer_Out.objects.all()
+    serializer_class = Bearer_OUT_Serializer
     # filterset_fields = ['PLMN_Carrier']
     search_fields = ['^Date']
     # ordering_fields = ['create_at']
@@ -126,14 +126,17 @@ def insertData(df, object, roam):
             bearer: object = object(
                 Date=df["Date"][i], Opérateur=df["Opérateur"][i],
                 GTPv2_C_Attempts_OUT=df["GTPv2-C Attempts OUT"][i], GTPv2_C_Failures_OUT=df["GTPv2-C Failures OUT"][i],
-                GTPv2_C_Failure_OUT=df["GTPv2-C Failure OUT %"][i], GTPv2_C_Average_Latency_msec_OUT=df["GTPv2-C Average Latency (msec) OUT"], GTPv2_C_Average_Session_Duration_msec_OUT=df["GTPv2-C Average Session Duration (msec) OUT"][i],
-                Efficacité_OUT=df["Efficacité OUT"][i],
+                GTPv2_C_Failure_OUT=df["GTPv2-C Failure OUT %"][i],
+                GTPv2_C_Average_Latency_msec_OUT=df["GTPv2-C Average Latency (msec) OUT"][i],
+                GTPv2_C_Average_Session_Duration_msec_OUT=df["GTPv2-C Average Session Duration (msec) OUT"][i],
+                Efficacité_OUT=df["Efficacité OUT"][i]
             )
         else:
             bearer: object = object(
                 Date=df["Date"][i], Opérateur=df["Opérateur"][i],
                 GTPv2_C_Attempts_IN=df["GTPv2-C Attempts IN"][i], GTPv2_C_Failures_IN=df["GTPv2-C Failures IN"][i],
-                GTPv2_C_Failure_IN=df["GTPv2-C Failure IN %"][i], GTPv2_C_Average_Latency_msec_IN=df["GTPv2-C Average Latency (msec) IN"][i], GTPv2_C_Average_Session_Duration_msec_IN=df["GTPv2-C Average Session Duration (msec) IN"][i],
+                GTPv2_C_Failure_IN=df["GTPv2-C Failure IN %"][i], GTPv2_C_Average_Latency_msec_IN=df["GTPv2-C Average Latency (msec) IN"][i],
+                GTPv2_C_Average_Session_Duration_msec_IN=df["GTPv2-C Average Session Duration (msec) IN"][i],
                 Efficacité_IN=df["Efficacité IN"][i],
         )
         i = i + 1
