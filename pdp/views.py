@@ -39,10 +39,10 @@ class PdpViewSet(viewsets.ModelViewSet):
             roaming = serializer.validated_data['roaming']
 
             if roaming == "OUT":
-                queryset = Pdp_OUT.objects.filter(Operator=country_operator)
+                queryset = Pdp_OUT.objects.filter(Opérateur=country_operator, Date=dateDebut).filter(Date=dateFin)
                 razbi = Pdp_OUT_Serializer(queryset, many=True)
             else:
-                queryset = Pdp_IN.objects.filter(Operator=country_operator)
+                queryset = Pdp_IN.objects.filter(Opérateur=country_operator, Date=dateDebut).filter(Date=dateFin)
                 razbi = Pdp_In_Serializer(queryset, many=True)
 
             return Response(razbi.data, status=status.HTTP_201_CREATED)
@@ -78,13 +78,13 @@ def insertData(df, object, roam):
             pdp: object = object(
                 Date=df["Date"][i], Operator=df["Operator"][i],
                 GTP_C_Procedure_Attempts=df["GTP-C Procedure Attempts"][i], GTP_C_Procedure_Failures=df["GTP-C Procedure Failures"][i],
-                GTP_C_Procedure_Failure=df["GTP-C Procedure Failure %"][i], GTP_C_Procedure_Average_Latency_msec=df["GTP-C Procedure Average Latency (msec)"], Eff_PDP_Act=df["Eff PDP Act"][i],
+                GTP_C_Procedure_Failure=df["GTP-C Procedure Failure %"][i], GTP_C_Procedure_Average_Latency_msec=df["GTP-C Procedure Average Latency (msec)"][i], Eff_PDP_Act=df["Eff PDP Act"][i],
             )
         else:
             pdp: object = object(
                 Date=df["Date"][i], Operator=df["Operator"][i],
                 GTP_C_Procedure_Attempts_IN=df["GTP-C Procedure Attempts IN"][i], GTP_C_Procedure_Failures_IN=df["GTP-C Procedure Failures IN"][i],
-                GTP_C_Procedure_Failure_IN =df["GTP-C Procedure Failure % IN"][i], GTP_C_Procedure_Average_Latency_msec__IN=df["GTP-C Procedure Average Latency (msec) IN"][i], Eff_PDP_Act_IN=df["Eff PDP Act IN"][i],
+                GTP_C_Procedure_Failure_IN =df["GTP-C Procedure Failure % IN"][i], GTP_C_Procedure_Average_Latency_msec_IN=df["GTP-C Procedure Average Latency (msec) IN"][i], Eff_PDP_Act_IN=df["Eff PDP Act IN"][i],
         )
         i = i + 1
         liste.append(pdp)           

@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec886171-0534-4f50-89dc-5ed4b155097d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/bearer/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearer/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bearer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearer/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kpi_dyn/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kpi_dyn/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sai/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sai/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +24,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -34,11 +39,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614845893232</updated>
-      <workItem from="1614845901199" duration="246000" />
+      <workItem from="1614845901199" duration="932000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
