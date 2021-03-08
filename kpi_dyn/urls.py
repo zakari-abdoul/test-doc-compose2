@@ -21,6 +21,8 @@ from rest_framework.routers import DefaultRouter
 from sai.views import SaiViewSet
 from bearer.views import BearerViewSet
 from pdp.views import PdpViewSet
+from globalP import views
+
 
 
 # Create a router and register our viewsets with it.
@@ -34,8 +36,11 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('', include('sai.urls')),
+    path('sai/attempssai/<target_id>/', SaiViewSet.as_view({"get": "getattemps"})),
     path('', include('bearer.urls')),
     path('', include('uploadFile.urls')),
+    path('countries/', views.countryFunctionView, name='country'),
+    path('homestats/', views.homedataFunctionView, name='home_stats'),
 
 ]
 

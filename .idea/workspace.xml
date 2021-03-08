@@ -2,11 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec886171-0534-4f50-89dc-5ed4b155097d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/dgid_backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/media/images/avatar/10796fbc-e221-4262-b74f-6ee62aa0a3e5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/media/images/avatar/2f7eedce-9ac1-4e00-b483-94eee2de6599.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/transfert/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/users/permissions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/globalP/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/dgid_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/dgid_backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/dgid_backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/dgid_backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/historiques/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/historiques/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/ordres/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/ordres/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/ordres/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/ordres/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/ordres/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/ordres/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/partenaires/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/partenaires/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/partenaires/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/partenaires/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/partenaires/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/partenaires/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/.idea/ankasso-rest-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/.idea/ankasso-rest-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/ankasso_rest_api/settings/local.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/ankasso_rest_api/settings/local.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/migrations/0002_auto_20210214_0145.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kpi_dyn.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kpi_dyn.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bearer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bearer/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kpi_dyn/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kpi_dyn/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kpi_dyn/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/kpi_dyn/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sai/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sai/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,18 +70,26 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1pHhObU7u0fo287ETDu8iyk3FDN" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/globalP" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/globalP" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -39,7 +99,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614845893232</updated>
-      <workItem from="1614845901199" duration="932000" />
+      <workItem from="1614845901199" duration="934000" />
+      <workItem from="1614899011068" duration="1035000" />
+      <workItem from="1614931139430" duration="4269000" />
+      <workItem from="1615025886304" duration="6641000" />
+      <workItem from="1615160646077" duration="1188000" />
+      <workItem from="1615193745293" duration="9879000" />
     </task>
     <servers />
   </component>
@@ -56,5 +121,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

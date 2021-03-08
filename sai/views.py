@@ -159,56 +159,6 @@ def Sai_OUT_list(request):
 #     return my_list
 #
 #
-# @api_view(['GET'])
-# def statistiquesView(request, format=None):
-#     """
-#      recevoir les statistiques concernant les donnees de transfert
-#     """
-#     transfert_count = len(Sai_OUT.objects.all())
-#     compte_count = len(Compte.objects.all())
-#     serializer_part = CompteSerializer(Sai_OUT.objects.all(), many=True).data
-#     transfert_serializer_part = TransfertSerializer(Sai_OUT.objects.all(), many=True).data
-#     transfert_order_serializer_part = TransfertSerializer(Sai_OUT.objects.all().order_by("-create_at"), many=True).data
-#     globalmontant = sommeTotal(serializer_part)
-#     lastTransfert_serialize = TransfertSerializer(Sai_OUT.objects.all().order_by("-create_at")[:5], many=True).data
-#     top3Transfert_serialize = TransfertSerializer(Sai_OUT.objects.all().order_by("-montant")[:3], many=True).data
-#     user_serialize = UserSerializer(User.objects.all().order_by("date_joined")[:5], many=True).data
-#     my_list = {}
-#     valuesTab = []
-#     #listeByDate = statsbyDate(transfert_serializer_part)
-#     montan=0
-#     for data in transfert_order_serializer_part:
-#         montan = montan + data["montant"]
-#         valuesTab.append(data["montant"])
-#         if data["originalName"] in my_list:
-#             my_list.update({data["originalName"]: my_list[data["originalName"]] + data["montant"]})
-#         else:
-#             my_list[data["originalName"]] = data["montant"]
-#     print(my_list)
-#     listeByDate = statsbyDate(transfert_serializer_part)
-#     total_account = 0
-#     return Response({"nbreTransfert": transfert_count, "globalmontant": globalmontant, "byDate": listeByDate,
-#                      "liste": my_list, "valuesTab": valuesTab, "lastTransfert": lastTransfert_serialize,
-#                      "userList": user_serialize, "top3": top3Transfert_serialize,})
-    #return HttpResponse(transfert_count)@api_view(['GET'])
-
-
-# @api_view(['GET','POST'])
-# def Sai_OUT_time_list(request, pk):
-#     if request.method == 'GET':
-#         snippets = Sai_OUT.objects.filter(Interval_Time=pk)[:10]
-#         serializer = Sai_OUT_Serializer(snippets, many=True)
-#         return Response(serializer.data)  
-    
-
-#     elif request.method == 'POST':
-#         data = request.data
-#         serializer = sai_OUT_serializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class SaiViewSet(viewsets.ModelViewSet):
     """
@@ -224,6 +174,28 @@ class SaiViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+
+    @action(methods=['get'], detail=False, url_name='attempssai')
+    def getattemps(self, request, *args, **kwargs):
+
+        type = kwargs['target_id']
+        if type == "out":
+            #queryset = Sai_OUT.objects.all()[:1000]
+            queryset = Sai_OUT.objects.all()
+            razbi = Sai_OUT_Serializer(queryset, many=True)
+        else:
+            queryset = Sai_IN.objects.all()
+            razbi = Sai_IN_Serializer(queryset, many=True)
+        my_list = {}
+        for data in razbi.data:
+            #montan = montan + data["montant"]
+            if data["Interval_Time"] in my_list:
+                current = my_list[data["Interval_Time"]] + data["EFF"]
+                my_list.update({data["Interval_Time"]: current/2})
+            else:
+                my_list[data["Interval_Time"]] = data["EFF"]
+
+        return Response({"liste": my_list})
 
     @action(detail=False, methods=['post'], serializer_class=ParameterwSaiSerializer)
     def parametresai(self, request, *args, **kwargs):

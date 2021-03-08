@@ -126,15 +126,8 @@ def insertData(df, object, roam):
             bearer: object = object(
                 Date=df["Date"][i], Opérateur=df["Opérateur"][i],
                 GTPv2_C_Attempts_OUT=df["GTPv2-C Attempts OUT"][i], GTPv2_C_Failures_OUT=df["GTPv2-C Failures OUT"][i],
-<<<<<<< HEAD
-                GTPv2_C_Failure_OUT=df["GTPv2-C Failure OUT %"][i],
-                GTPv2_C_Average_Latency_msec_OUT=df["GTPv2-C Average Latency (msec) OUT"][i],
-                GTPv2_C_Average_Session_Duration_msec_OUT=df["GTPv2-C Average Session Duration (msec) OUT"][i],
-                Efficacité_OUT=df["Efficacité OUT"][i]
-=======
                 GTPv2_C_Failure_OUT=df["GTPv2-C Failure OUT %"][i], GTPv2_C_Average_Latency_msec_OUT=df["GTPv2-C Average Latency (msec) OUT"][1], GTPv2_C_Average_Session_Duration_msec_OUT=df["GTPv2-C Average Session Duration (msec) OUT"][i],
                 Efficacité_OUT=df["Efficacité OUT"][i],
->>>>>>> 565f5f7eb10203404eed62c6047c882a17c1fdca
             )
         else:
             bearer: object = object(

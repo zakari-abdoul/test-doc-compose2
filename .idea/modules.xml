@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/.idea/ankasso-rest-api.iml" filepath="$PROJECT_DIR$/../../Scorpion/ankasso-rest-api/.idea/ankasso-rest-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/dgid_backend.iml" filepath="$PROJECT_DIR$/../../Document Memoire/dgid_backend/.idea/dgid_backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/kpi_dyn.iml" filepath="$PROJECT_DIR$/.idea/kpi_dyn.iml" />
     </modules>
   </component>
