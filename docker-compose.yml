@@ -1,0 +1,47 @@
+version: '3.3'
+services:
+  kpi_api:
+    build: .
+    command: python /src/manage.py runserver 0.0.0.0:8095
+    container_name: kpi
+    restart: always
+    volumes:
+      - .:/src
+    env_file:
+      - kpi_dyn/.env
+    ports:
+      - "8095:8095"
+    depends_on:
+      - kpi_db
+    networks:
+      - kpi-network
+  kpi_db:
+    restart: always
+    image: postgres:13-alpine
+    container_name: db_kpi.com
+    ports:
+      - "5460:5460"
+    env_file:
+      - kpi_dyn/.env
+    volumes:
+      - postgres_kpi_data:/var/lib/postgresql/data2/
+    networks:
+      - kpi-network
+  kpi_pgadmin:
+    restart: always
+    image: dpage/pgadmin4:5
+    container_name: pgadmin.kpi.com
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@sonatel_digidex.com"
+      PGADMIN_DEFAULT_PASSWORD: "@dmin123"
+    ports:
+      - "8091:8091"
+    depends_on:
+      - kpi_db
+    networks:
+      - kpi-network
+networks:
+  kpi-network:
+    driver: bridge
+volumes:
+  postgres_kpi_data: # Define seperate volume for Postgres data
