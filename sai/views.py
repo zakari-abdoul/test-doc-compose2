@@ -207,8 +207,10 @@ class SaiViewSet(viewsets.ModelViewSet):
             roaming = serializer.validated_data['roaming']
 
             if roaming == "OUT":
-                queryset = Sai_OUT.objects.filter(PLMN_Carrier=country_operator, Interval_Time=dateDebut).filter(Interval_Time=dateFin)
-                razbi = Sai_OUT_Serializer(queryset, many=True)
+                queryset1 = Sai_OUT.objects.filter(PLMN_Carrier=country_operator, Interval_Time=dateDebut)
+                queryset2 = Sai_OUT.object.filter(PLMN_Carrier=country_operator, Interval_Time=dateFin)
+
+                razbi = Sai_OUT_Serializer(queryset1, many=True)
             else:
                 queryset = Sai_IN.objects.filter(PLMN_Carrier=country_operator, Interval_Time=dateDebut).filter(Interval_Time=dateFin)
                 razbi = Sai_IN_Serializer(queryset, many=True)

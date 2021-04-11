@@ -49,7 +49,7 @@ class PdpViewSet(viewsets.ModelViewSet):
         return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'], serializer_class=FilePdpSerializer)
-    def uploadPdp(self, request, *args, **kwargs):
+    def uploadpdp(self, request, *args, **kwargs):
         """
          Telecharger le fichier txt envoyer par la dgid pour effectuer une transaction
         """
