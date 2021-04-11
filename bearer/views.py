@@ -87,10 +87,10 @@ class BearerViewSet(viewsets.ModelViewSet):
             roaming = serializer.validated_data['roaming']
 
             if roaming == "OUT":
-                queryset = Bearer_Out.objects.filter(Opérateur=country_operator, Date=dateDebut).filter(Date=dateFin)
+                queryset = Bearer_Out.objects.filter(Opérateur=country_operator).filter(Date__gte=dateDebut).filter(Date__lte=dateFin)
                 razbi = Bearer_OUT_Serializer(queryset, many=True)
             else:
-                queryset = Bearer_In.objects.filter(Opérateur=country_operator, Date=dateDebut).filter(Date=dateFin)
+                queryset = Bearer_In.objects.filter(Opérateur=country_operator).filter(Date__gte=dateDebut).filter(Date__lte=dateFin)
                 razbi = Bearer_In_Serializer(queryset, many=True)
 
             return Response(razbi.data, status=status.HTTP_201_CREATED)

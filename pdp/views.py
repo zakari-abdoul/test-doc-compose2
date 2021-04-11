@@ -30,7 +30,7 @@ class PdpViewSet(viewsets.ModelViewSet):
         serializer.save()
 
     @action(detail=False, methods=['post'], serializer_class=ParameterwPdpSerializer)
-    def parametrePdp(self, request, *args, **kwargs):
+    def parametrepdp(self, request, *args, **kwargs):
         serializer = ParameterwPdpSerializer(data=request.data)
         if serializer.is_valid():
             dateDebut = serializer.validated_data['dateDebut']
@@ -39,17 +39,17 @@ class PdpViewSet(viewsets.ModelViewSet):
             roaming = serializer.validated_data['roaming']
 
             if roaming == "OUT":
-                queryset = Pdp_OUT.objects.filter(Opérateur=country_operator, Date=dateDebut).filter(Date=dateFin)
+                queryset = Pdp_OUT.objects.filter(Opérateur=country_operator).filter(Date__gte=dateDebut).filter(Date__lte=dateFin)
                 razbi = Pdp_OUT_Serializer(queryset, many=True)
             else:
-                queryset = Pdp_IN.objects.filter(Opérateur=country_operator, Date=dateDebut).filter(Date=dateFin)
+                queryset = Pdp_IN.objects.filter(Opérateur=country_operator).filter(Date__gte=dateDebut).filter(Date__lte=dateFin)
                 razbi = Pdp_In_Serializer(queryset, many=True)
 
             return Response(razbi.data, status=status.HTTP_201_CREATED)
         return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'], serializer_class=FilePdpSerializer)
-    def uploadpdp(self, request, *args, **kwargs):
+    def uploadPdp(self, request, *args, **kwargs):
         """
          Telecharger le fichier txt envoyer par la dgid pour effectuer une transaction
         """
