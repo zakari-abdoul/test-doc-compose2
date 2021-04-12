@@ -9,6 +9,8 @@ from pdp.serializers import FilePdpSerializer, ParameterwPdpSerializer, Pdp_IN_S
 from rest_framework.decorators import api_view, action
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
+from datetime import datetime
+import time
 
 
 
@@ -37,6 +39,16 @@ class PdpViewSet(viewsets.ModelViewSet):
             dateFin = serializer.validated_data['dateFin']
             country_operator = serializer.validated_data['country_operator']
             roaming = serializer.validated_data['roaming']
+            
+            # Creation et conversion des variables date
+            # my_time1 = time.strptime(dateDebut, '%b %d, %Y %I:%M')
+            # my_time2 = time.strptime(dateFin, '%b %d, %Y %I:%M')
+            # timestamp1 = time.mktime(my_time1)
+            # timestamp2 = time.mktime(my_time2)
+            # Conversion de Interval_Time en seconde
+            # k = Sai_OUT.objects.get(Interval_Time)
+            # CInterval_Time = time.strptime(k, '%b %d, %Y %I:%M')
+            # Interval_Time_finale = time.mktime(CInterval_Time)
 
             if roaming == "OUT":
                 queryset = Pdp_OUT.objects.filter(Opérateur=country_operator).filter(Date__gte=dateDebut).filter(Date__lte=dateFin)

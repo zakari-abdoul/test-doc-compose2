@@ -9,6 +9,9 @@ from sai.serializers import Sai_IN_Serializer, Sai_OUT_Serializer, FileSaiSerial
 from rest_framework.decorators import api_view, action
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
+from datetime import datetime
+import time
 
 
 
@@ -205,14 +208,25 @@ class SaiViewSet(viewsets.ModelViewSet):
             dateFin = serializer.validated_data['dateFin']
             country_operator = serializer.validated_data['country_operator']
             roaming = serializer.validated_data['roaming']
+            
+            # Creation et conversion des variables date            
+            # my_time1 = time.strptime(dateDebut, '%b %d, %Y %I:%M')
+            # my_time2 = time.strptime(dateFin, '%b %d, %Y %I:%M')
+            # timestamp1 = time.mktime(my_time1)
+            # timestamp2 = time.mktime(my_time2)
+            # Conversion de Interval_Time en seconde
+            # k = Sai_OUT.objects.get(Interval_Time)
+            # CInterval_Time = time.strptime(k, '%b %d, %Y %I:%M')
+            # Interval_Time_finale = time.mktime(CInterval_Time)
 
             if roaming == "OUT":
-                # Je cree ici une deuxieme varialbe pour voir si c possible de faire le filtering
-                queryset = Sai_OUT.objects.filter(PLMN_Carrier=country_operator).filter(Interval_Time__gte=dateDebut).filter(Interval_Time__lte=dateFin)
-                razbi = Sai_OUT_Serializer(queryset, many=True)
+                queryset1 = Sai_OUT.objects.filter(PLMN_Carrier=country_operator).filter(Interval_Time_finale__gte=dateDebut).filter(Interval_Time_finale__lte=dateFin)
+                razbi = Sai_OUT_Serializer(queryset1, many=True)                               
+
             else:
                 queryset = Sai_IN.objects.filter(PLMN_Carrier=country_operator).filter(Interval_Time__gte=dateDebut).filter(Interval_Time__lte=dateFin)
                 razbi = Sai_IN_Serializer(queryset, many=True)
+                
 
             return Response(razbi.data, status=status.HTTP_201_CREATED)
         return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
