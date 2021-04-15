@@ -209,18 +209,9 @@ class SaiViewSet(viewsets.ModelViewSet):
             country_operator = serializer.validated_data['country_operator']
             roaming = serializer.validated_data['roaming']
             
-            # Creation et conversion des variables date            
-            # my_time1 = time.strptime(dateDebut, '%b %d, %Y %I:%M')
-            # my_time2 = time.strptime(dateFin, '%b %d, %Y %I:%M')
-            # timestamp1 = time.mktime(my_time1)
-            # timestamp2 = time.mktime(my_time2)
-            # Conversion de Interval_Time en seconde
-            # k = Sai_OUT.objects.get(Interval_Time)
-            # CInterval_Time = time.strptime(k, '%b %d, %Y %I:%M')
-            # Interval_Time_finale = time.mktime(CInterval_Time)
 
             if roaming == "OUT":
-                queryset1 = Sai_OUT.objects.filter(PLMN_Carrier=country_operator).filter(Interval_Time_finale__gte=dateDebut).filter(Interval_Time_finale__lte=dateFin)
+                queryset1 = Sai_OUT.objects.filter(PLMN_Carrier=country_operator).filter(Interval_Time__gte=dateDebut).filter(Interval_Time__lte=dateFin)
                 razbi = Sai_OUT_Serializer(queryset1, many=True)                               
 
             else:
@@ -232,7 +223,7 @@ class SaiViewSet(viewsets.ModelViewSet):
         return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'], serializer_class=FileSaiSerializer)
-    def uploadsai(self, request, *args, **kwargs):
+    def upload(self, request, *args, **kwargs):
         """
          Telecharger le fichier txt envoyer par la dgid pour effectuer une transaction
         """
