@@ -201,7 +201,7 @@ class SaiViewSet(viewsets.ModelViewSet):
         return Response({"liste": my_list})
 
     @action(detail=False, methods=['post'], serializer_class=ParameterwSaiSerializer)
-    def parametresai(self, request, *args, **kwargs):
+    def parametre(self, request, *args, **kwargs):
         serializer = ParameterwSaiSerializer(data=request.data)
         if serializer.is_valid():
             dateDebut = serializer.validated_data['dateDebut']
@@ -271,14 +271,16 @@ def insertData(df, object, roam):
     while i < len(df):
         if roam == "out":
             sai: object = object(
-                Interval_Time=df["Interval Time"][i], PLMN_Carrier=df["PLMN Carrier"][i],
+                Interval_Time = time.mktime(time.strptime(df["Interval Time"][i], '%b %d, %Y %I:%M')),
+                PLMN_Carrier=df["PLMN Carrier"][i],
                 Direction=df["Direction"][i], Service=df["Service"][i],
                 Opcode=df["Opcode"][i], HVA=df["HVA"][i], Total_Transactions=df["Total Transactions"][i],
                 Failed_Transactions=df["Failed Transactions"][i], EFF=df["EFF"][i],
             )
         else:
             sai: object = object(
-                Interval_Time=df["Unnamed: 0"][i], PLMN_Carrier=df["Unnamed: 1"][i],
+                Interval_Time = time.mktime(time.strptime(df["Unnamed: 0"][i], '%b %d, %Y %I:%M')),
+                PLMN_Carrier=df["Unnamed: 1"][i],
                 Direction=df["Unnamed: 2"][i], Service=df["Unnamed: 3"][i],
                 Opcode=df["Unnamed: 4"][i], HVA=df["Unnamed: 5"][i], Total_Transactions=df["Unnamed: 6"][i],
                 Failed_Transactions=df["Unnamed: 7"][i], EFF=df["Unnamed: 8"][i],

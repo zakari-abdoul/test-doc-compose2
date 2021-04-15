@@ -88,13 +88,15 @@ def insertData(df, object, roam):
     while i < len(df): 
         if roam == "out":
             pdp: object = object(
-                Date=df["Date"][i], Operator=df["Operator"][i],
+                Date= time.mktime(time.strptime(df["Date"][i], '%b %d, %Y %I:%M')),
+                Operator=df["Operator"][i],
                 GTP_C_Procedure_Attempts=df["GTP-C Procedure Attempts"][i], GTP_C_Procedure_Failures=df["GTP-C Procedure Failures"][i],
                 GTP_C_Procedure_Failure=df["GTP-C Procedure Failure %"][i], GTP_C_Procedure_Average_Latency_msec=df["GTP-C Procedure Average Latency (msec)"][i], Eff_PDP_Act=df["Eff PDP Act"][i],
             )
         else:
             pdp: object = object(
-                Date=df["Date"][i], Operator=df["Operator"][i],
+                Date= time.mktime(time.strptime(df["Date"][i], '%b %d, %Y %I:%M')),
+                Operator=df["Operator"][i],
                 GTP_C_Procedure_Attempts_IN=df["GTP-C Procedure Attempts IN"][i], GTP_C_Procedure_Failures_IN=df["GTP-C Procedure Failures IN"][i],
                 GTP_C_Procedure_Failure_IN =df["GTP-C Procedure Failure % IN"][i], GTP_C_Procedure_Average_Latency_msec_IN=df["GTP-C Procedure Average Latency (msec) IN"][i], Eff_PDP_Act_IN=df["Eff PDP Act IN"][i],
         )

@@ -26,6 +26,8 @@ RUN pip install --upgrade pip
 RUN python3 -m pip install wheel
 RUN python3 -m pip install m2crypto
 RUN python3 -m pip install -r requirements.txt
+RUN python manage.py makemigrations
+RUN python manage.py migrate
 
 # Run the application:
 COPY . /src/

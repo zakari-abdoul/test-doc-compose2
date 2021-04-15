@@ -80,7 +80,7 @@ class BearerViewSet(viewsets.ModelViewSet):
         serializer.save()
 
     @action(detail=False, methods=['post'], serializer_class=ParameterwBearerSerializer)
-    def parametrebearer(self, request, *args, **kwargs):
+    def parametre(self, request, *args, **kwargs):
         serializer = ParameterwBearerSerializer(data=request.data)
         if serializer.is_valid():
             dateDebut = serializer.validated_data['dateDebut']
@@ -109,7 +109,7 @@ class BearerViewSet(viewsets.ModelViewSet):
         return Response("Erreur de manipulation, verifier vos donné",status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'], serializer_class=FileBearerSerializer)
-    def uploadbearer(self, request, *args, **kwargs):
+    def upload(self, request, *args, **kwargs):
         """
          Telecharger le fichier txt envoyer par la dgid pour effectuer une transaction
         """
@@ -136,14 +136,16 @@ def insertData(df, object, roam):
     while i < len(df): 
         if roam == "out":
             bearer: object = object(
-                Date=df["Date"][i], Opérateur=df["Opérateur"][i],
+                Date = time.mktime(time.strptime(df["Date"][i], '%b %d, %Y %I:%M')),
+                Opérateur=df["Opérateur"][i],
                 GTPv2_C_Attempts_OUT=df["GTPv2-C Attempts OUT"][i], GTPv2_C_Failures_OUT=df["GTPv2-C Failures OUT"][i],
                 GTPv2_C_Failure_OUT=df["GTPv2-C Failure OUT %"][i], GTPv2_C_Average_Latency_msec_OUT=df["GTPv2-C Average Latency (msec) OUT"][1], GTPv2_C_Average_Session_Duration_msec_OUT=df["GTPv2-C Average Session Duration (msec) OUT"][i],
                 Efficacité_OUT=df["Efficacité OUT"][i],
             )
         else:
             bearer: object = object(
-                Date=df["Date"][i], Opérateur=df["Opérateur"][i],
+                Date = time.mktime(time.strptime(df["Date"][i], '%b %d, %Y %I:%M')),
+                Opérateur=df["Opérateur"][i],
                 GTPv2_C_Attempts_IN=df["GTPv2-C Attempts IN"][i], GTPv2_C_Failures_IN=df["GTPv2-C Failures IN"][i],
                 GTPv2_C_Failure_IN=df["GTPv2-C Failure IN %"][i], GTPv2_C_Average_Latency_msec_IN=df["GTPv2-C Average Latency (msec) IN"][i],
                 GTPv2_C_Average_Session_Duration_msec_IN=df["GTPv2-C Average Session Duration (msec) IN"][i],

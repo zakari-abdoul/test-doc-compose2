@@ -20,7 +20,7 @@ services:
     image: postgres:13-alpine
     container_name: db_kpi.com
     ports:
-      - "5460:5460"
+      - "5432:5432"
     env_file:
       - kpi_dyn/.env
     volumes:
@@ -35,7 +35,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: "admin@sonatel_digidex.com"
       PGADMIN_DEFAULT_PASSWORD: "@dmin123"
     ports:
-      - "8091:8091"
+      - "5050:5050"
     depends_on:
       - kpi_db
     networks:
