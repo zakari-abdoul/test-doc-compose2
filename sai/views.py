@@ -173,7 +173,7 @@ class SaiViewSet(viewsets.ModelViewSet):
     search_fields = ['^PLMN_Carrier']
     # ordering_fields = ['create_at']
     # filter_backends = [filters.SearchFilter,DjangoFilterBackend, filters.OrderingFilter]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save()
@@ -247,12 +247,13 @@ class SaiViewSet(viewsets.ModelViewSet):
             #                             'Total Transactions': 'Total_Transactions',
             #                             'Failed Transactions': 'Failed_Transactions'})
 
-            print(df)
+            # print(df)
             #print(df_new)
 
             liste = []
-            if serializer.validated_data['type'] =="OUT":
+            if serializer.validated_data['type'] =="OUT":                
                 liste = insertData(df, Sai_OUT, "out")
+                # print(Sai_OUT.objects.filter(PLMN_Carrier=country_operator))
             else:
                 liste = insertData(df, Sai_IN, "in")
 
