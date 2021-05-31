@@ -256,9 +256,9 @@ class SaiViewSet(viewsets.ModelViewSet):
 
 def insertData(df, object, roam):
     liste = []
-    i = 1
+    i = 0
     if roam == "in":
-        i = 4
+        i = 3
     while i < len(df):
         if roam == "out":
             sai: object = object(

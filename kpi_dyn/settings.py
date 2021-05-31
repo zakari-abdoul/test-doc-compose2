@@ -95,16 +95,16 @@ WSGI_APPLICATION = 'kpi_dyn.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'kpi_dyn',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'kpi_dyn',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 #DATABASES with Postgresql
 # DATABASES = {
@@ -117,16 +117,16 @@ WSGI_APPLICATION = 'kpi_dyn.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env("POSTGRES_DB_NAME"),
-        'USER': env("POSTGRES_USER"),
-        'PASSWORD': env("POSTGRES_PASSWORD"),
-        'HOST': env("POSTGRES_HOST"),
-        'PORT': env("POSTGRES_PORT"),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': env("POSTGRES_DB_NAME"),
+#         'USER': env("POSTGRES_USER"),
+#         'PASSWORD': env("POSTGRES_PASSWORD"),
+#         'HOST': env("POSTGRES_HOST"),
+#         'PORT': env("POSTGRES_PORT"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

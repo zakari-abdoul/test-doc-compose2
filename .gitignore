@@ -1,0 +1,11 @@
+/.idea
+/env
+/db.sqlite3
+/bearer/migrations
+/bearer/__pycache__
+/pdp/migrations
+/pdp/__pycache__
+/globalP/migrations
+/globalP/__pycache__
+/sai/migrations
+/sai/__pycache__
